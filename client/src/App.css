@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;800&family=Ubuntu:ital,wght@0,300;1,400&display=swap');
+*{
+  font-family: 'Montserrat', sans-serif;
+}
+.App {
+  background-color: #800080;
+}
+
+.user-card{
+  
+  height: 45px;
+  width: 200px;
+  margin: 15px;
+  padding: 10px;
+  box-shadow: 2px 2px 20px grey;
+  display: flex;
+  cursor:pointer;
+  background-color: rgb(130, 170, 170);
+  transition: box-shadow 0.3s ease-in-out;
+}
+.gchat-card{
+  
+  height: 35px;
+  width: 170px;
+  margin: 10px;
+  padding: 10px;
+  box-shadow: 2px 2px 20px grey;
+  display: flex;
+  cursor:pointer;
+  background-color: rgb(130, 170, 170);
+  transition: box-shadow 0.3s ease-in-out;
+}
+.single-chat{
+  height: 45px;
+  width: 300px;
+  margin: 15px;
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  cursor: pointer;
+  background-color: #F5F5F5;
+}
+.single-chat img{
+  border-radius: 50%;
+}
+.user-card img{
+  border-radius: 50%;
+}
+.user-card:hover{
+  box-shadow: 8px 8px 30px grey;
+}

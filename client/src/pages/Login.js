@@ -22,7 +22,7 @@ const Login = () => {
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
      
       if (userInfo) navigate("/chats");
-    }, []);
+    }, [user]);
     const handleClick = async() => {
       try{
         

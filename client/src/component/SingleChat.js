@@ -9,9 +9,18 @@ const SingleChat = ({chat}) => {
 
   }
   return (
-    <div className='single-chat' style={{background:selectedUser._id === chat._id? 'green':''}} onClick={handleClick}>
-        <img src={chat.pic}/>
-        <span style={{margin:'10px', fontWeight:'600'}}>{chat.name}</span>
+    <div className='single-chat' style={{background:selectedUser === chat? '#a9dfbf':''}} onClick={handleClick}>
+      {
+        chat.isGroupChat == true? (
+          <span style={{margin:'10px', fontWeight:'400'}}>{chat.chatName}</span>
+        ):(
+          <>
+            <img src={chat.users[1].pic}/>
+            <span style={{margin:'10px', fontWeight:'400'}}>{chat.users[1].name}</span>
+          
+          </>
+        )
+      }
     </div>
   )
 }

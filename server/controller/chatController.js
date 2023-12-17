@@ -61,4 +61,87 @@ const fetchChat = async(req,res) => {
     }
 }
 
-module.exports = { accessChat, fetchChat };
+const createGroupChat = async(req,res) => {
+
+    if(!req.body.name || !req.body.users){
+        res.status(400).send({message:"Please fill all the details"})
+    }
+    var users = JSON.parse(req.body.users)
+    if(users.length < 2){
+        res.status(400).send({mesage:"More than 2 people is required including you to create group chat "})
+    }
+
+    users.push(req.user)
+    try {
+        const groupChat = await Chat.create({
+            chatName: req.body.name,
+            users: users,
+            isGroupChat: true,
+            groupAdmin: req.user
+        })
+        const fullGroupChat = await Chat.findOne({_id:groupChat._id})
+        .populate("users", "-password")
+        .populate("groupAdmin","-password")
+        console.log("full Group Chat", fullGroupChat);
+        res.status(200).json(fullGroupChat)
+    } catch (error) {
+        res.send("error while creating group chat")
+    }
+    
+}
+
+const renameGroupChat = async(req,res) => {
+    const updatedChat = await Chat.findByIdAndUpdate(
+        req.body._id,
+        {
+            chatName:req.body.chatName
+        },
+        {
+            new:true
+        }
+    ).populate("users", "-password")
+    .populate("groupAdmin", "-password");
+
+    if(!updatedChat){
+        res.status(400).json({message:"chat not found"})
+    }
+    else{
+        res.status(200).send(updatedChat)
+    }
+}
+
+const updateMembers = async(req,res) => {
+    let newUsers = [...req.body.users, req.user]
+    const updatedChat = await Chat.findByIdAndUpdate(
+        req.body._id,
+        {users:newUsers},
+        {new:true}
+    )
+    .populate("users","-password")
+    .populate("groupAdmin", "-password");
+    if(!updatedChat){
+        res.status(400).json({message:"Chat not found"})
+    }
+    else{
+        res.status(200).send(updatedChat)
+    }
+}
+
+const leaveGroup = async(req,res) => {
+    console.log(req.body);
+    const updatedChat = await Chat.findByIdAndUpdate(
+        req.body._id,
+        {users:req.body.users},
+        {new:true}
+    )
+    .populate("users","-password")
+    .populate("groupAdmin", "-password");
+    console.log("after leave", updatedChat);
+    if(!updatedChat){
+        res.status(400).send("Chat not found")
+    }
+    else{
+        res.status(201).send(updatedChat)
+    }
+}
+module.exports = { accessChat, fetchChat, createGroupChat, renameGroupChat, updateMembers, leaveGroup };

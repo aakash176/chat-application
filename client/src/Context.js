@@ -5,7 +5,7 @@ import axios from "axios";
 const chatContext = createContext()
 const Context = ({children}) => {
     const navigate = useNavigate()
-    const [selectedUser, setSelectedUser] = useState({})
+    const [selectedUser, setSelectedUser] = useState()
     const [user, setUser] = useState()
     const [chats, setChats] = useState([])
     useEffect(() => {

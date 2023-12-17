@@ -35,7 +35,7 @@ export default function Groupchat() {
     
   }
   const [chatName, setChatName] = React.useState()
-  const {user} = ChatState()
+  const {user, setChats, chats} = ChatState()
   const config = {
     headers: {
       Authorization: `Bearer ${user.token}`,
@@ -57,13 +57,41 @@ export default function Groupchat() {
   }
   const handleChatName = (e) => {
     setChatName(e.target.value)
-    console.log(chatName);
   }
 
   const handleAdduser = (u) => {
-    setgroupUser([...groupUser, u])
+    if(groupUser.includes(u)){
+      alert("User already added")
+    }
+    else{
+      
+      setgroupUser([...groupUser, u])
+    }
     
 
+  }
+  const handleSubmit = async() => {
+    if(!chatName || !groupUser){
+      alert("Please fill all the required field")
+      return
+    }
+    
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      var {data} = await axios.post(`${backend_api_url}/chats/group`, {name:chatName, users:JSON.stringify(groupUser.map((u)=>u._id))}, config)
+      console.log("group chat", data);
+      
+      setChats([data, ...chats])
+      alert("Group chat created")
+      handleClose()
+    } catch (error) {
+      alert("Error occured while creating group chat");
+    }
+  
   }
 
   return (
@@ -114,7 +142,7 @@ export default function Groupchat() {
                 </div>)
               }
             </div>
-            <button style={{padding:'3px', float:'right'}}>Create Group</button>
+            <button style={{padding:'3px', float:'right'}} onClick={handleSubmit}>Create Group</button>
         </Box>
       </Modal>
     </div>

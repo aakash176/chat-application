@@ -3,9 +3,15 @@
   font-family: 'Montserrat', sans-serif;
 }
 .App {
-  background-color: #800080;
+  background-color: turquoise;
 }
-
+.updateBtn{
+  border: none;
+}
+.updateBtn:hover{
+  font-size: 13px;
+  
+}
 .user-card{
   
   height: 45px;

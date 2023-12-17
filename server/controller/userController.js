@@ -56,7 +56,7 @@ const authUser = async(req,res) => {
         }
     }
     catch(err){
-        res.Error(err)
+        res.send(err)
     }
     
 }

@@ -78,9 +78,10 @@ const GroupChatUpdate = ({chat, openModal, setOpenModal, fetchAgain, setFetchAga
                 },
             };
             const {data} = await axios.put(`${backend_api_url}/chats/rename`, {_id:selectedUser._id, chatName:chatName}, config)
-            setSelectedUser(data)
             setFetchAgain(!fetchAgain)
+            setSelectedUser(data)
             handleCloseModal()
+            alert("Group name updated")
 
 
         }

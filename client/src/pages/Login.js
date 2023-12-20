@@ -29,8 +29,8 @@ const Login = () => {
         const body = {email, password}
         const {data} = await axios.post(`${backend_api_url}/user/login`, body);
         localStorage.setItem("userInfo", JSON.stringify(data))
+        console.log('logged user', data);
         setUser(data)
-        console.log("selectedUser", selectedUser);
         navigate('/chats')
       } catch(err){
         alert("invalid email or password!");

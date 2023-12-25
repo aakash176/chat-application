@@ -12,6 +12,14 @@
   font-size: 13px;
   
 }
+
+.messages{
+  display:flex;
+  flex-direction: column;
+  padding: 5px;
+
+}
+
 .user-card{
   
   height: 45px;

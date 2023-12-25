@@ -8,7 +8,7 @@ import SearchedUser from './SearchedUser';
 import Loading from '../Misc/Loading';
 
 
-const LeftDrawer = ({open, setOpen}) => {
+const LeftDrawer = ({open, setOpen, setFetchAgain, fetchAgain}) => {
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(false)
   const {user} = ChatState()
@@ -46,7 +46,7 @@ const LeftDrawer = ({open, setOpen}) => {
       <div>
         {users &&
           users.length > 0 &&
-          users.map((u) => <SearchedUser singleUser={u} />)}
+          users.map((u) => <SearchedUser singleUser={u} setFetchAgain={setFetchAgain} fetchAgain={fetchAgain} />)}
       </div>
       {loading && <Loading />}
     </Box>

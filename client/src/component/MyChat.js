@@ -16,16 +16,22 @@ const MyChat = ({fetchAgain}) => {
     e.stopPropagation()
   }
   const fetchChats = async() => {
-    let config = {
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-    };
     
-    const {data} = await axios.get(`${backend_api_url}/chats`, config);
-    console.log('chat', data);
-    console.log("selected user from mychat", selectedUser);
-    setChats(data)
+    try {
+      let config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      
+      const {data} = await axios.get(`${backend_api_url}/chats`, config);
+      
+      setChats(data)
+      console.log('chats', data);
+    } catch (error) {
+      console.log(error);
+    }
+    
   }
   useEffect(() => {
     fetchChats()

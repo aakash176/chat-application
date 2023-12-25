@@ -53,7 +53,6 @@ export default function Groupchat() {
   const handleRemoveUser = (g) => {
     let newgroupUser = groupUser.filter((u)=> u._id !== g._id)
     setgroupUser(newgroupUser)
-    console.log(groupUser);
   }
   const handleChatName = (e) => {
     setChatName(e.target.value)

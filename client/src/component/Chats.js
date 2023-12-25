@@ -15,7 +15,7 @@ const Chats = () => {
     
   return (
     <div style={{width:'100%'}}>
-        {user && <SideDrawer/>}
+        {user && <SideDrawer setFetchAgain={setFetchAgain} fetchAgain={fetchAgain} />}
         <Box style={{display:'flex', flexDirection:'row', justifyContent:'space-between', width:'100%', height:'92vh'}}>
             {user && <MyChat fetchAgain={fetchAgain}/>}
             {user && <ChatBox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}/>}

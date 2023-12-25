@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import {AiOutlineSearch} from 'react-icons/ai'
 import BasicMenu from './BasicMenu';
 import LeftDrawer from './LeftDrawer';
-const SideDrawer = () => {
+const SideDrawer = ({setFetchAgain, fetchAgain}) => {
     const [search, setSearch] = useState(false)
     const handleSearch = (e) => {
         e.stopPropagation()
@@ -38,7 +38,7 @@ const SideDrawer = () => {
         </Tooltip>
         <h3>Chat App</h3>
         <BasicMenu style={{ paddingRight: "5px" }} />
-        {search && <LeftDrawer open={search} setOpen={setSearch} />}
+        {search && <LeftDrawer open={search} setOpen={setSearch} setFetchAgain={setFetchAgain} fetchAgain={fetchAgain} />}
       </Box>
     </div>
   );

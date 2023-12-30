@@ -25,7 +25,7 @@ export default function AccountMenu() {
       boxShadow: 24,
       p: 4,
     };
-    const {user} = ChatState()
+    const {user, setUser} = ChatState()
     const icon = user.email[0]
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -46,6 +46,7 @@ export default function AccountMenu() {
     localStorage.removeItem('userInfo')
     setOpenModal(false);
     setLoading(false)
+    setUser()
     navigate('/')
   }
   return (
